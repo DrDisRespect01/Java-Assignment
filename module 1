@@ -1,0 +1,192 @@
+1. Encapsulation
+class EncapsulationExample {
+    private int value;
+    
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public static void main(String[] args) {
+        EncapsulationExample obj = new EncapsulationExample();
+        obj.setValue(10);
+        System.out.println("Value: " + obj.getValue());
+    }
+}
+2. Inheritance and Polymorphism
+
+class Parent {
+    void show() {
+        System.out.println("Parent class");
+    }
+}
+
+class Child extends Parent {
+    void show() {
+        System.out.println("Child class");
+    }
+}
+
+public class InheritanceExample {
+    public static void main(String[] args) {
+        Parent obj = new Child();
+        obj.show();
+    }
+}
+3. Method Overloading and Method Overriding
+
+class Overloading {
+    void display(int a) {
+        System.out.println("Integer: " + a);
+    }
+
+    void display(double a) {
+        System.out.println("Double: " + a);
+    }
+}
+
+class Overriding extends Overloading {
+    void display(int a) {
+        System.out.println("Overridden Integer: " + a);
+    }
+}
+
+public class OverloadingOverriding {
+    public static void main(String[] args) {
+        Overriding obj = new Overriding();
+        obj.display(5);
+        obj.display(5.5);
+    }
+}
+4. Multiple Inheritance Using Interfaces
+
+interface A {
+    void show();
+}
+
+interface B {
+    void display();
+}
+
+class MultipleInheritance implements A, B {
+    public void show() {
+        System.out.println("Show A");
+    }
+
+    public void display() {
+        System.out.println("Display B");
+    }
+
+    public static void main(String[] args) {
+        MultipleInheritance obj = new MultipleInheritance();
+        obj.show();
+        obj.display();
+    }
+}
+5. Use of this and super
+
+class Parent {
+    int num = 10;
+}
+
+class Child extends Parent {
+    int num = 20;
+
+    void display() {
+        System.out.println("Child num: " + this.num);
+        System.out.println("Parent num: " + super.num);
+    }
+
+    public static void main(String[] args) {
+        Child obj = new Child();
+        obj.display();
+    }
+}
+6. final Keyword for Variables, Methods, and Classes
+
+final class FinalClass {}
+
+class Example {
+    final int VALUE = 100;
+
+    final void display() {
+        System.out.println("Final method");
+    }
+}
+
+public class FinalExample {
+    public static void main(String[] args) {
+        Example obj = new Example();
+        System.out.println("Final Variable: " + obj.VALUE);
+        obj.display();
+    }
+}
+7. Prime Number Check Using while Loop
+
+import java.util.Scanner;
+
+public class PrimeCheck {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int n = sc.nextInt(), i = 2;
+        boolean isPrime = true;
+
+        while (i <= n / 2) {
+            if (n % i == 0) {
+                isPrime = false;
+                break;
+            }
+            i++;
+        }
+
+        System.out.println(n + " is " + (isPrime ? "Prime" : "Not Prime"));
+    }
+}
+8. Factorial Using Recursion
+
+import java.util.Scanner;
+
+public class FactorialRecursion {
+    static int factorial(int n) {
+        return (n == 0) ? 1 : n * factorial(n - 1);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int num = sc.nextInt();
+        System.out.println("Factorial of " + num + " is: " + factorial(num));
+    }
+}
+9. Odd or Even Check
+
+import java.util.Scanner;
+
+public class OddEven {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int num = sc.nextInt();
+        System.out.println(num + " is " + (num % 2 == 0 ? "Even" : "Odd"));
+    }
+}
+10. Factorial Using Recursion (Repeated)
+
+import java.util.Scanner;
+
+public class FactorialRecursion2 {
+    static int factorial(int n) {
+        return (n == 0) ? 1 : n * factorial(n - 1);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int num = sc.nextInt();
+        System.out.println("Factorial of " + num + " is: " + factorial(num));
+    }
+}
