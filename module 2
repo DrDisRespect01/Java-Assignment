@@ -1,0 +1,238 @@
+Section 1: Defining, Implementing, and Importing Packages
+1. Java Package with MathUtils Class
+File: utilities/MathUtils.java
+
+package utilities;
+
+public class MathUtils {
+    public static int add(int a, int b) {
+        return a + b;
+    }
+}
+File: Main.java
+
+import utilities.MathUtils;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Sum: " + MathUtils.add(5, 10));
+    }
+}
+2. Package shapes with Shape Interface
+File: shapes/Shape.java
+
+package shapes;
+
+public interface Shape {
+    double area();
+    double perimeter();
+}
+File: shapes/Circle.java
+
+package shapes;
+
+public class Circle implements Shape {
+    double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    public double area() {
+        return Math.PI * radius * radius;
+    }
+
+    public double perimeter() {
+        return 2 * Math.PI * radius;
+    }
+}
+File: shapes/Rectangle.java
+
+package shapes;
+
+public class Rectangle implements Shape {
+    double length, width;
+
+    public Rectangle(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+
+    public double area() {
+        return length * width;
+    }
+
+    public double perimeter() {
+        return 2 * (length + width);
+    }
+}
+File: Main.java
+
+import shapes.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Shape circle = new Circle(5);
+        Shape rectangle = new Rectangle(4, 6);
+        System.out.println("Circle Area: " + circle.area());
+        System.out.println("Rectangle Perimeter: " + rectangle.perimeter());
+    }
+}
+3. Importing java.util and Using ArrayList
+
+import java.util.ArrayList;
+
+public class ArrayListExample {
+    public static void main(String[] args) {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+        for (int num : numbers) {
+            System.out.println(num);
+        }
+    }
+Section 2: Interfaces and Lambda Expressions
+4. Functional Interface and Lambda Expression
+
+interface Calculator {
+    int compute(int a, int b);
+}
+
+public class LambdaExample {
+    public static void main(String[] args) {
+        Calculator add = (a, b) -> a + b;
+        Calculator subtract = (a, b) -> a - b;
+        Calculator multiply = (a, b) -> a * b;
+        System.out.println("Addition: " + add.compute(10, 5));
+        System.out.println("Subtraction: " + subtract.compute(10, 5));
+        System.out.println("Multiplication: " + multiply.compute(10, 5));
+    }
+}
+5. Sorting Strings in Descending Order Using Lambda
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class StringSort {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Banana");
+        list.add("Apple");
+        list.add("Cherry");
+        Collections.sort(list, (a, b) -> b.compareTo(a));
+        System.out.println(list);
+    }
+}
+6. Method Reference for Squaring a Number
+
+interface Square {
+    int calculate(int x);
+}
+
+public class MethodReferenceExample {
+    static int square(int x) {
+        return x * x;
+    }
+
+    public static void main(String[] args) {
+        Square s = MethodReferenceExample::square;
+        System.out.println("Square: " + s.calculate(6));
+    }
+}
+Section 3: Errors and Exceptions
+7. Difference Between Try-Catch and Try-Catch-Finally
+
+
+import java.util.Scanner;
+
+public class ExceptionExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter two numbers: ");
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+
+        try {
+            System.out.println("Result: " + (a / b));
+        } catch (ArithmeticException e) {
+            System.out.println("Error: Division by zero");
+        } finally {
+            System.out.println("Execution completed.");
+        }
+    }
+}
+8. Custom Exception InvalidAgeException
+
+class InvalidAgeException extends Exception {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+public class AgeCheck {
+    static void validate(int age) throws InvalidAgeException {
+        if (age < 18) throw new InvalidAgeException("Age must be 18 or above.");
+    }
+
+    public static void main(String[] args) {
+        try {
+            validate(16);
+        } catch (InvalidAgeException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+}
+9. Logging InvalidAgeException to a File
+
+import java.io.IOException;
+import java.util.logging.*;
+
+class InvalidAgeException extends Exception {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+public class LoggingExample {
+    private static final Logger logger = Logger.getLogger(LoggingExample.class.getName());
+
+    static void validate(int age) throws InvalidAgeException {
+        if (age < 18) throw new InvalidAgeException("Age must be 18 or above.");
+    }
+
+    public static void main(String[] args) throws IOException {
+        FileHandler fh = new FileHandler("error.log", true);
+        logger.addHandler(fh);
+        SimpleFormatter formatter = new SimpleFormatter();
+        fh.setFormatter(formatter);
+
+        try {
+            validate(16);
+        } catch (InvalidAgeException e) {
+            logger.severe(e.getMessage());
+        }
+    }
+}
+10. Using throw and throws for Factorial Calculation
+
+class FactorialException extends Exception {
+    public FactorialException(String message) {
+        super(message);
+    }
+}
+
+public class Factorial {
+    static int factorial(int n) throws FactorialException {
+        if (n < 0) throw new FactorialException("Negative numbers not allowed");
+        return (n == 0) ? 1 : n * factorial(n - 1);
+    }
+
+    public static void main(String[] args) {
+        try {
+            System.out.println("Factorial: " + factorial(5));
+        } catch (FactorialException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+}
